@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "hexlet-django-blog"
+version = "0.1.0"
+description = ""
+authors = ["Alexander K <alexander_github@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+django = "^5.0.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
