@@ -1,2 +1,9 @@
 <h1>О блоге</h1>
 <p>Эксперименты с Django на Хекслете</p>
+<p>{{ tags|join:', ' }}</p>
+<br>
+<ul>слова:
+  {% for tag in tags %}
+  <li>{{ tag }}</li>
+  {% endfor %}
+</ul>
