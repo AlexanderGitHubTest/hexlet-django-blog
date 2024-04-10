@@ -1,5 +1,9 @@
+from django.views.generic.base import View
 from django.shortcuts import render
 
-def index(request):
+class ArticlesView(View):
+
     app_name = "articles"
-    return render(request, "articles/index.html", context={"name": app_name})
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "articles/index.html", context={"name": self.app_name})
