@@ -1,9 +1,16 @@
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic.base import View
-from django.shortcuts import render
 
 class ArticlesView(View):
 
-    app_name = "articles"
+    tags = 'python'
+    article_id = 42
 
     def get(self, request, *args, **kwargs):
-        return render(request, "articles/index.html", context={"name": self.app_name})
+        return HttpResponseRedirect(reverse("article", args=(self.tags, self.article_id)))
+
+class Article(View):
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("Статья номер " + str(self.kwargs['article_id']) + ". Тег " + self.kwargs['tags'])
