@@ -1,16 +1,12 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.views.generic.base import View
+from django.shortcuts import render
+from django.views import View
 
-class ArticlesView(View):
+from hexlet_django_blog.article.models import Article
 
-    tags = 'python'
-    article_id = 42
-
+class IndexView(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect(reverse("article", args=(self.tags, self.article_id)))
-
-class Article(View):
-
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("Статья номер " + str(self.kwargs['article_id']) + ". Тег " + self.kwargs['tags'])
+        articles = Article.objects.all()[:15]
+        return render(request, 
+                      'articles/index.html', 
+                      context={'articles': articles,}
+                     )
