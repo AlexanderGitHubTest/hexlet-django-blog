@@ -1,7 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from hexlet_django_blog.article.models import Article
+
+class ArticleView(View):
+    def get(self, request, *args, **kwargs):
+        article = get_object_or_404(Article, id=kwargs['id'])
+        return render(request, 
+                      'articles/show.html', 
+                      context={'article': article,}
+                     )
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
