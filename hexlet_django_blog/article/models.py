@@ -7,3 +7,15 @@ class Article(models.Model):
 
     def __str__(self):
         return self.name
+
+class Comment(models.Model):
+    name = models.CharField(max_length=200) # текст комментария
+
+    def __str__(self):
+        return self.name
+
+class ArticleComment(models.Model):
+    content = models.CharField('content', max_length=100)
+
+    def __str__(self):
+        return self.name
