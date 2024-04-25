@@ -62,3 +62,12 @@ class ArticleFormEditView(View):
             messages.add_message(request, messages.SUCCESS, f"Книга {form.cleaned_data['name']} успешно изменена!")
             return redirect('articles')
         return render(request, 'articles/update.html', {'form': form, 'article_id':article_id})
+
+class ArticleFormDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get('id')
+        article = Article.objects.get(id=article_id)
+        if article:
+            messages.add_message(request, messages.SUCCESS, f"Книга {article.name} успешно удалена!")
+            article.delete()
+        return redirect('articles')

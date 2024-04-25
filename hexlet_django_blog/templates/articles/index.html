@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div><a href="{% url 'articles_create' %}">Добавить статью...</a></div>
     <h1>Список статей</h1>
     {% if messages %}
     <ul class="messages">
@@ -13,5 +14,11 @@
         <h2><a href="{% url "article_id" article.id %}">{{ article.name }}</a></h2>
         <div>{{ article.body|slice:":200" }}</div>
         <div><a href="{% url "articles_update" article.id %}">[редактировать]</a></div>
+        <div>
+          <form action="{% url 'articles_delete' article.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Удалить">
+          </form>
+        </div>
     {% endfor %}
 {% endblock %}
